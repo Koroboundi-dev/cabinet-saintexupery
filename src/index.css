@@ -10,6 +10,12 @@ body {
 
 [x-cloak] { display: none !important; }
 
+/* Masque tout badge "Powered by Netlify" injecte */
+a[href*="netlify.com"], a[href*="netlify.app"],
+div[id^="netlify"], iframe[src*="netlify"] {
+  display: none !important;
+}
+
 .hero-gradient {
   background-size: cover;
   background-position: center;
