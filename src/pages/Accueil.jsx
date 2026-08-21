@@ -6,19 +6,19 @@ import { formatDateFr, limit, imageSrc } from '../utils/format.js'
 
 export default function Accueil() {
   const [data, setData] = useState(null)
-  const settings = useSettings().settings
+  const { settings, ready } = useSettings()
 
   useEffect(() => {
     document.title = 'Cabinet Médical Saint-Exupéry International | Médecine, Urgences, Prévention'
     api.get('/accueil').then(setData).catch(() => setData({ services: [], medecins: [], campagnes: [], actualites: [], formations: [] }))
   }, [])
 
-  const heroImage = imageSrc(settings.hero_image) || '/images/medical10.png'
+  const heroImage = ready ? imageSrc(settings.hero_image) || '/images/medical100.png' : null
 
   return (
     <>
       {/* HERO */}
-      <section className="hero-gradient relative overflow-hidden min-h-[90vh] flex items-center fade-in" style={{ backgroundImage: `url('${heroImage}')` }}>
+      <section className="hero-gradient relative overflow-hidden min-h-[90vh] flex items-center fade-in" style={heroImage ? { backgroundImage: `url('${heroImage}')` } : undefined}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
           <div className="grid lg:grid-cols-1 gap-12 items-center">
             <div className="text-center max-w-3xl mx-auto">

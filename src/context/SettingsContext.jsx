@@ -4,7 +4,7 @@ import { api } from '../api/client.js'
 const DEFAULTS = {
   hero_titre: 'Cabinet Médical<br>Saint-Exupéry<br>International',
   hero_soustitre: 'Médecine Générale & Spécialités, Urgences, Assistance Médicale, Transports Aériens, Médecine Aérospatiale, Santé au Travail, Formations.',
-  hero_image: 'images/medical1.png',
+  hero_image: 'images/medical100.png',
   telephone_1: '+226 45 10 36 36',
   telephone_2: '+226 50 25 10 10',
   whatsapp_numero: '22645233636',
@@ -45,6 +45,7 @@ const SettingsContext = createContext(DEFAULTS)
 
 export function SettingsProvider({ children }) {
   const [settings, setSettings] = useState(DEFAULTS)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     let mounted = true
@@ -56,6 +57,9 @@ export function SettingsProvider({ children }) {
         }
       })
       .catch(() => {})
+      .finally(() => {
+        if (mounted) setReady(true)
+      })
     return () => {
       mounted = false
     }
@@ -65,7 +69,7 @@ export function SettingsProvider({ children }) {
     api.get('/settings').then((data) => setSettings({ ...DEFAULTS, ...data }))
 
   return (
-    <SettingsContext.Provider value={{ settings, refresh }}>
+    <SettingsContext.Provider value={{ settings, ready, refresh }}>
       {children}
     </SettingsContext.Provider>
   )
