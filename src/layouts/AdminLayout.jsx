@@ -21,8 +21,7 @@ const navSections = [
     title: 'Gestion des données',
     items: [
       { to: '/admin/rendez-vous', label: 'Rendez-vous', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
-      { to: '/admin/inscriptions/formations', label: 'Inscriptions Formations', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4' },
-      { to: '/admin/inscriptions/campagnes', label: 'Inscriptions Campagnes', icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10' },
+      { accordion: true },
       { to: '/admin/contacts', label: 'Messages', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
       { to: '/admin/entreprises', label: 'Entreprises', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4' },
     ],
@@ -69,66 +68,70 @@ export default function AdminLayout() {
                   <div className="px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">{section.title}</div>
                 )}
                 <div className="space-y-1">
-                  {section.items.map((item) => (
-                    <NavLink
-                      key={item.to}
-                      to={item.to}
-                      end={item.end}
-                      onClick={() => !item.to.includes('inscriptions') && setInscriptionsOpen(false)}
-                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-base font-medium transition ${
-                        isActive(item.to)
-                          ? 'bg-blue-600 text-white'
-                          : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                      }`}
-                    >
-                      <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} /></svg>
-                      {item.label}
-                    </NavLink>
-                  ))}
+                  {section.items.map((item) =>
+                    item.accordion ? (
+                      <div key="inscriptions-accordion">
+                        <button
+                          onClick={() => setInscriptionsOpen(!inscriptionsOpen)}
+                          className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl text-base font-medium transition ${
+                            location.pathname.startsWith('/admin/inscriptions')
+                              ? 'bg-blue-600/20 text-blue-400'
+                              : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                          }`}
+                        >
+                          <span className="flex items-center gap-3">
+                            <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" /></svg>
+                            Inscriptions
+                          </span>
+                          <svg className={`w-4 h-4 transition-transform ${inscriptionsOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                        {inscriptionsOpen && (
+                          <div className="mt-1 ml-6 space-y-1">
+                            <NavLink
+                              to="/admin/inscriptions/formations"
+                              onClick={() => setInscriptionsOpen(true)}
+                              className={`block px-3 py-2 rounded-lg text-sm font-medium transition ${
+                                location.pathname === '/admin/inscriptions/formations'
+                                  ? 'bg-blue-600 text-white'
+                                  : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                              }`}
+                            >
+                              Formations
+                            </NavLink>
+                            <NavLink
+                              to="/admin/inscriptions/campagnes"
+                              onClick={() => setInscriptionsOpen(true)}
+                              className={`block px-3 py-2 rounded-lg text-sm font-medium transition ${
+                                location.pathname === '/admin/inscriptions/campagnes'
+                                  ? 'bg-blue-600 text-white'
+                                  : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                              }`}
+                            >
+                              Campagnes
+                            </NavLink>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <NavLink
+                        key={item.to}
+                        to={item.to}
+                        end={item.end}
+                        onClick={() => !item.to.includes('inscriptions') && setInscriptionsOpen(false)}
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-base font-medium transition ${
+                          isActive(item.to)
+                            ? 'bg-blue-600 text-white'
+                            : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                        }`}
+                      >
+                        <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} /></svg>
+                        {item.label}
+                      </NavLink>
+                    )
+                  )}
                 </div>
               </div>
             ))}
-
-            <div>
-              <button
-                onClick={() => setInscriptionsOpen(!inscriptionsOpen)}
-                className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl text-base font-medium transition ${
-                  location.pathname.startsWith('/admin/inscriptions')
-                    ? 'bg-blue-600/20 text-blue-400'
-                    : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                }`}
-              >
-                <span className="flex items-center gap-3">
-                  <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" /></svg>
-                  Inscriptions
-                </span>
-                <svg className={`w-4 h-4 transition-transform ${inscriptionsOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/></svg>
-              </button>
-              {inscriptionsOpen && (
-                <div className="mt-1 ml-6 space-y-1">
-                  <NavLink
-                    to="/admin/inscriptions/formations"
-                    className={`block px-3 py-2 rounded-lg text-sm font-medium transition ${
-                      location.pathname === '/admin/inscriptions/formations'
-                        ? 'bg-blue-600 text-white'
-                        : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                    }`}
-                  >
-                    Formations
-                  </NavLink>
-                  <NavLink
-                    to="/admin/inscriptions/campagnes"
-                    className={`block px-3 py-2 rounded-lg text-sm font-medium transition ${
-                      location.pathname === '/admin/inscriptions/campagnes'
-                        ? 'bg-blue-600 text-white'
-                        : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-                    }`}
-                  >
-                    Campagnes
-                  </NavLink>
-                </div>
-              )}
-            </div>
           </nav>
 
           <div className="p-4 border-t border-gray-800 space-y-1">
