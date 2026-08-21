@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { api } from '../api/client.js'
-import { formatDayMonth, formatDateSlash } from '../utils/format.js'
+import { formatDayMonth, formatDateSlash, imageSrc } from '../utils/format.js'
 
 const parseListe = (valeur) => {
   if (!valeur) return []
@@ -59,6 +59,9 @@ export default function CampagneDetail() {
 
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {campagne.image && (
+            <img src={imageSrc(campagne.image)} alt={campagne.titre} className="w-full h-64 sm:h-80 object-cover rounded-2xl shadow-lg mb-8" />
+          )}
           <div className="grid sm:grid-cols-2 gap-4 mb-8">
             <div className="bg-blue-50 rounded-xl p-5">
               <h3 className="text-base font-bold text-blue-400 uppercase mb-2">Période</h3>

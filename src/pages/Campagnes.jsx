@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api/client.js'
-import { formatDayMonth, formatDateSlash, limit } from '../utils/format.js'
+import { formatDayMonth, formatDateSlash, limit, imageSrc } from '../utils/format.js'
 
 export default function Campagnes() {
   const [campagnes, setCampagnes] = useState([])
@@ -27,6 +27,9 @@ export default function Campagnes() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {campagnes.map((campagne) => (
                 <div key={campagne.id} className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition flex flex-col">
+                  {campagne.image && (
+                    <img src={imageSrc(campagne.image)} alt={campagne.titre} className="w-full h-52 object-cover" />
+                  )}
                   <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6 text-white">
                     <span className="inline-block bg-white/20 text-base font-bold px-4 py-1 rounded-full mb-3">{campagne.type || 'Campagne'}</span>
                     <h2 className="text-2xl font-bold">{campagne.titre}</h2>
