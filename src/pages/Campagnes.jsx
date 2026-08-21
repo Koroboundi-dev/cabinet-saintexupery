@@ -28,7 +28,9 @@ export default function Campagnes() {
               {campagnes.map((campagne) => (
                 <div key={campagne.id} className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition flex flex-col">
                   {campagne.image && (
-                    <img src={imageSrc(campagne.image)} alt={campagne.titre} className="w-full h-52 object-cover" />
+                    <div className="overflow-hidden group/img cursor-zoom-in">
+                      <img src={imageSrc(campagne.image)} alt={campagne.titre} className="w-full h-52 object-cover transition-transform duration-500 ease-out group-hover/img:scale-110" />
+                    </div>
                   )}
                   <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6 text-white">
                     <span className="inline-block bg-white/20 text-base font-bold px-4 py-1 rounded-full mb-3">{campagne.type || 'Campagne'}</span>

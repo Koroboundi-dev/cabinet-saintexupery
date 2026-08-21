@@ -29,8 +29,8 @@ export default function Formations() {
                 <div key={formation.id} className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition">
                   <div className="flex flex-col lg:flex-row">
                     {formation.image ? (
-                      <div className="lg:w-[28rem] shrink-0 h-80 lg:h-auto overflow-hidden">
-                        <img src={imageSrc(formation.image)} alt={formation.titre} className="w-full h-full object-cover" />
+                      <div className="lg:w-[28rem] shrink-0 h-80 lg:h-auto overflow-hidden group/img cursor-zoom-in">
+                        <img src={imageSrc(formation.image)} alt={formation.titre} className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-110" />
                       </div>
                     ) : null}
                     <div className={formation.image ? 'p-7 flex-1' : 'bg-gradient-to-r from-red-500 to-red-600 p-7 text-white lg:w-[28rem] shrink-0'}>
