@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api/client.js'
 import { formatFcfa, formatDayMonth, formatDateSlash, imageSrc } from '../utils/format.js'
+import Lightbox from '../components/Lightbox.jsx'
 
 export default function Formations() {
   const [formations, setFormations] = useState([])
+  const [zoom, setZoom] = useState(null)
 
   useEffect(() => {
     document.title = 'Formations | Cabinet Saint-Exupéry International'
@@ -29,7 +31,10 @@ export default function Formations() {
                 <div key={formation.id} className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition">
                   <div className="flex flex-col lg:flex-row">
                     {formation.image ? (
-                      <div className="lg:w-[28rem] shrink-0 h-80 lg:h-auto overflow-hidden group/img cursor-zoom-in">
+                      <div
+                        className="lg:w-[28rem] shrink-0 h-80 lg:h-auto overflow-hidden group/img cursor-zoom-in"
+                        onClick={() => setZoom(imageSrc(formation.image))}
+                      >
                         <img src={imageSrc(formation.image)} alt={formation.titre} className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-110" />
                       </div>
                     ) : null}
@@ -90,6 +95,7 @@ export default function Formations() {
           )}
         </div>
       </section>
+      {zoom && <Lightbox src={zoom} alt="Formation" onClose={() => setZoom(null)} />}
     </>
   )
 }

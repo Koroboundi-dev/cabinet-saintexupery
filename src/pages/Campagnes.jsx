@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api/client.js'
 import { formatDayMonth, formatDateSlash, limit, imageSrc } from '../utils/format.js'
+import Lightbox from '../components/Lightbox.jsx'
 
 export default function Campagnes() {
   const [campagnes, setCampagnes] = useState([])
+  const [zoom, setZoom] = useState(null)
 
   useEffect(() => {
     document.title = 'Campagnes de Prévention | Cabinet Saint-Exupéry International'
@@ -28,7 +30,10 @@ export default function Campagnes() {
               {campagnes.map((campagne) => (
                 <div key={campagne.id} className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition flex flex-col">
                   {campagne.image && (
-                    <div className="overflow-hidden group/img cursor-zoom-in">
+                    <div
+                      className="overflow-hidden group/img cursor-zoom-in"
+                      onClick={() => setZoom(imageSrc(campagne.image))}
+                    >
                       <img src={imageSrc(campagne.image)} alt={campagne.titre} className="w-full h-52 object-cover transition-transform duration-500 ease-out group-hover/img:scale-110" />
                     </div>
                   )}
@@ -59,6 +64,7 @@ export default function Campagnes() {
           )}
         </div>
       </section>
+      {zoom && <Lightbox src={zoom} alt="Campagne" onClose={() => setZoom(null)} />}
     </>
   )
 }
