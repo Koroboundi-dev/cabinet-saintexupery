@@ -210,7 +210,15 @@ CREATE TABLE IF NOT EXISTS settings (
 
 export async function ensureSchema() {
   if (!schemaReady) {
-    schemaReady = getSql()(SCHEMA).catch((e) => {
+    const sql = getSql()
+    const statements = SCHEMA.split(';')
+      .map((s) => s.trim())
+      .filter(Boolean)
+    schemaReady = (async () => {
+      for (const statement of statements) {
+        await sql.query(statement)
+      }
+    })().catch((e) => {
       schemaReady = null
       throw e
     })
