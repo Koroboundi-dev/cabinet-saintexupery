@@ -15,17 +15,10 @@ export default function FormationInscription() {
 
   useEffect(() => {
     document.title = 'Inscription à la formation | Cabinet Saint-Exupéry International'
-    api.get('/formations')
-      .then((formations) => {
-        for (const f of formations) {
-          const s = f.sessions?.find((x) => String(x.id) === String(sessionId))
-          if (s) {
-            setFormation(f)
-            setSession(s)
-            return
-          }
-        }
-        navigate('/formations')
+    api.get(`/formation-sessions/${sessionId}`)
+      .then((d) => {
+        setFormation(d.formation)
+        setSession(d.session)
       })
       .catch(() => navigate('/formations'))
   }, [sessionId, navigate])

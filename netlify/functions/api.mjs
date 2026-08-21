@@ -97,6 +97,7 @@ function mapFormation(f, sessions = []) {
     places_disponibles: prochaine
       ? Number(prochaine.places_max) - Number(prochaine.places_prises)
       : null,
+    sessions: sessions.map(mapSession),
   }
 }
 
@@ -324,6 +325,14 @@ export default async (request) => {
         WHERE formation_id = ${rows[0].id} AND statut = 'planifiee'
         ORDER BY date_debut ASC`
       return json({ ...mapFormation(rows[0], sessions.map(mapSession)), sessions: sessions.map(mapSession) })
+    }
+
+    if (seg[0] === 'formation-sessions' && seg[1] && seg.length === 2 && method === 'GET') {
+      const sRows = await sql`SELECT * FROM sessions_formation WHERE id = ${Number(seg[1])} LIMIT 1`
+      if (!sRows[0]) return json({ message: 'Session non trouvée.' }, 404)
+      const fRows = await sql`SELECT * FROM formations WHERE id = ${sRows[0].formation_id} AND active = TRUE LIMIT 1`
+      if (!fRows[0]) return json({ message: 'Formation non trouvée.' }, 404)
+      return json({ formation: mapFormation(fRows[0], [sRows[0]]), session: mapSession(sRows[0]) })
     }
 
     /* ===== CAMPAGNES PUBLIC ===== */
