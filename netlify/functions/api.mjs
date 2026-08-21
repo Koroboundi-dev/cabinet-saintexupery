@@ -360,15 +360,18 @@ export default async (request) => {
       const b = await readBody(request)
       const errors = validateRendezVous(b)
       if (Object.keys(errors).length) return json({ message: 'Données invalides.', errors }, 422)
-      if (b.medecin_id) {
-        const m = await sql`SELECT id FROM medecins WHERE id = ${b.medecin_id}`
+      const medecinId = b.medecin_id ? Number(b.medecin_id) : null
+      const serviceId = b.service_id ? Number(b.service_id) : null
+      if (medecinId) {
+        const m = await sql`SELECT id FROM medecins WHERE id = ${medecinId}`
         if (!m[0]) return json({ message: 'Données invalides.', errors: { medecin_id: 'Le médecin sélectionné est invalide.' } }, 422)
       }
+      const heure = `${b.heure_souhaitee}:00`
       await sql`
         INSERT INTO rendez_vous (nom, prenom, telephone, whatsapp, email, type_consultation, medecin_id, service_id, date_souhaitee, heure_souhaitee, motif, commentaire, statut)
         VALUES (${b.nom}, ${b.prenom}, ${b.telephone}, ${b.whatsapp || null}, ${b.email || null},
-                ${b.type_consultation || null}, ${b.medecin_id || null}, ${b.service_id || null},
-                ${b.date_souhaitee}, ${b.heure_souhaitee}:00, ${b.motif || null}, ${b.commentaire || null}, 'en_attente')`
+                ${b.type_consultation || null}, ${medecinId}, ${serviceId},
+                ${b.date_souhaitee}, ${heure}, ${b.motif || null}, ${b.commentaire || null}, 'en_attente')`
       return json({ success: true }, 201)
     }
 
