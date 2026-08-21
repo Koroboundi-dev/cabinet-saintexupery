@@ -65,7 +65,7 @@ export default function RendezVousAdmin() {
                       {rdv.email && <div className="text-xs text-gray-400">{rdv.email}</div>}
                     </td>
                     <td className="px-5 py-4 text-gray-600 whitespace-nowrap">{formatDateFr(rdv.date_souhaitee)}<br /><span className="text-xs text-gray-400">{rdv.heure_souhaitee?.slice(0, 5)}</span></td>
-                    <td className="px-5 py-4 text-gray-600">{rdv.medecin_nom || '—'}</td>
+                    <td className="px-5 py-4 text-gray-600">{rdv.medecin_nom ? `Dr ${rdv.medecin_nom} ${rdv.medecin_prenom || ''}`.trim() : '—'}</td>
                     <td className="px-5 py-4 text-gray-600 max-w-xs"><span className="line-clamp-2">{rdv.motif}</span></td>
                     <td className="px-5 py-4">
                       <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold ${statutColor(rdv.statut)}`}>{statutLabel(rdv.statut)}</span>
