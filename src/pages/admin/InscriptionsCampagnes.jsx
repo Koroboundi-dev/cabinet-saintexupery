@@ -31,7 +31,6 @@ export default function InscriptionsCampagnes() {
                 <tr>
                   <th className="px-5 py-3">Participant</th>
                   <th className="px-5 py-3">Contact</th>
-                  <th className="px-5 py-3">Entreprise</th>
                   <th className="px-5 py-3">Campagne</th>
                   <th className="px-5 py-3">Date</th>
                   <th className="px-5 py-3">Statut</th>
@@ -46,7 +45,6 @@ export default function InscriptionsCampagnes() {
                       <div>{ins.telephone}</div>
                       {ins.email && <div className="text-xs text-gray-400">{ins.email}</div>}
                     </td>
-                    <td className="px-5 py-4 text-gray-600">{ins.entreprise || '—'}</td>
                     <td className="px-5 py-4 text-gray-600">{ins.campagne_titre || `#${ins.campagne_id}`}</td>
                     <td className="px-5 py-4 text-gray-400 text-xs whitespace-nowrap">{formatDateFr(ins.created_at)}</td>
                     <td className="px-5 py-4">
