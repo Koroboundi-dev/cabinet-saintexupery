@@ -36,11 +36,11 @@ export default function Contact() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16">
+      <section className="bg-gradient-to-br from-red-600 to-red-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-blue-200 text-lg font-semibold uppercase tracking-wider">Contact</span>
+          <span className="text-red-200 text-lg font-semibold uppercase tracking-wider">Contact</span>
           <h1 className="text-4xl sm:text-5xl font-extrabold mt-2 mb-4">Nous Contacter</h1>
-          <p className="text-blue-100 text-lg max-w-xl">Une question ? Une préoccupation ? Notre équipe est à votre écoute.</p>
+          <p className="text-red-100 text-lg max-w-xl">Une question ? Une préoccupation ? Notre équipe est à votre écoute.</p>
         </div>
       </section>
 

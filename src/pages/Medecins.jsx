@@ -13,11 +13,11 @@ export default function Medecins() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16">
+      <section className="bg-gradient-to-br from-red-600 to-red-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-blue-200 text-base font-semibold uppercase tracking-wider">Notre Équipe</span>
+          <span className="text-red-200 text-base font-semibold uppercase tracking-wider">Notre Équipe</span>
           <h1 className="text-4xl sm:text-5xl font-extrabold mt-2 mb-4">Nos Médecins</h1>
-          <p className="text-blue-100/80 text-xl max-w-xl">Une équipe de professionnels qualifiés à votre service.</p>
+          <p className="text-red-100/80 text-xl max-w-xl">Une équipe de professionnels qualifiés à votre service.</p>
         </div>
       </section>
 

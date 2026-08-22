@@ -12,11 +12,11 @@ export default function Services() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16">
+      <section className="bg-gradient-to-br from-red-600 to-red-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-blue-200 text-sm font-semibold uppercase tracking-wider">Nos Services</span>
+          <span className="text-red-200 text-sm font-semibold uppercase tracking-wider">Nos Services</span>
           <h1 className="text-3xl sm:text-4xl font-extrabold mt-2 mb-4">Des soins complets pour tous vos besoins</h1>
-          <p className="text-blue-100/80 max-w-xl">Du consultation générale au transport médical aérien, nous offrons une prise en charge complète.</p>
+          <p className="text-red-100/80 max-w-xl">Du consultation générale au transport médical aérien, nous offrons une prise en charge complète.</p>
         </div>
       </section>
 
