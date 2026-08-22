@@ -32,7 +32,7 @@ export default function FormationDetail() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-red-500 to-red-600 text-white py-12">
+      <section className="bg-gradient-to-br from-red-600 to-red-800 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/formations" className="inline-flex items-center gap-1 text-red-100 text-base mb-4 hover:text-white transition">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/></svg>

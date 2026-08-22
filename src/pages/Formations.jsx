@@ -15,9 +15,9 @@ export default function Formations() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-red-500 to-red-600 text-white py-16">
+      <section className="bg-gradient-to-br from-red-600 to-red-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-red-100 text-lg font-semibold uppercase tracking-wider">Formations</span>
+          <span className="text-red-200 text-lg font-semibold uppercase tracking-wider">Formations</span>
           <h1 className="text-4xl sm:text-5xl font-extrabold mt-2 mb-4">Formez-vous aux gestes de vie</h1>
           <p className="text-red-100 text-lg max-w-xl">Formations certifiantes aux premiers secours et autres spécialités médicales.</p>
         </div>
@@ -38,7 +38,7 @@ export default function Formations() {
                         <img src={imageSrc(formation.image)} alt={formation.titre} className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-110" />
                       </div>
                     ) : null}
-                    <div className={formation.image ? 'p-7 flex-1' : 'bg-gradient-to-r from-red-500 to-red-600 p-7 text-white lg:w-[28rem] shrink-0'}>
+                    <div className={formation.image ? 'p-7 flex-1' : 'bg-gradient-to-r from-red-600 to-red-800 p-7 text-white lg:w-[28rem] shrink-0'}>
                       <div className="flex items-center gap-3 mb-3">
                         {formation.certification && (
                           <span className={`${formation.image ? 'bg-red-100 text-red-700' : 'bg-white/20 text-white'} text-base font-bold px-4 py-1 rounded-full`}>{formation.certification}</span>
