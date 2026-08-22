@@ -110,7 +110,7 @@ export default function RendezVous() {
               {errors.motif && <p className="text-red-500 text-sm mt-1">{errors.motif[0]}</p>}
             </div>
 
-            <button type="submit" disabled={submitting} className="w-full bg-blue-600 text-white py-4 rounded-xl text-lg font-bold hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition">
+            <button type="submit" disabled={submitting} className="w-full bg-red-600 text-white py-4 rounded-xl text-lg font-bold hover:bg-red-700 disabled:opacity-60 disabled:cursor-not-allowed transition">
               {submitting ? 'Envoi en cours…' : 'Envoyer ma demande'}
             </button>
 

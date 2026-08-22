@@ -51,7 +51,7 @@ export default function Campagnes() {
                           De {campagne.heure_debut} à {campagne.heure_fin}
                         </p>
                       )}
-                      <Link to={`/campagnes/${campagne.slug}`} className="block w-full text-center bg-blue-600 text-white py-3.5 rounded-xl text-lg font-semibold hover:bg-blue-700 transition">Voir la campagne</Link>
+                      <Link to={`/campagnes/${campagne.slug}`} className="block w-full text-center bg-red-600 text-white py-3.5 rounded-xl text-lg font-semibold hover:bg-red-700 transition">Voir la campagne</Link>
                     </div>
                   </div>
                 </div>
