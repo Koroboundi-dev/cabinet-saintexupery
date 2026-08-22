@@ -18,7 +18,7 @@ export default function Footer() {
             <div className="flex items-center gap-5">
               <a href={`tel:${tel1}`} className="text-white text-xl font-medium hover:underline">Appeler maintenant</a>
               <span className="text-blue-300">|</span>
-              <Link to="/rendez-vous" className="bg-white text-blue-700 px-6 py-2.5 rounded-lg text-xl font-semibold hover:bg-blue-50 transition">Prendre RDV</Link>
+              <Link to="/rendez-vous" className="bg-red-600 text-white px-6 py-2.5 rounded-lg text-xl font-semibold hover:bg-red-700 transition">Prendre RDV</Link>
             </div>
           </div>
         </div>

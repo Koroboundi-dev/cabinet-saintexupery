@@ -29,7 +29,7 @@ export default function Accueil() {
               <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-lg leading-relaxed">{settings.hero_soustitre}</p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-10 justify-center">
-                <Link to="/rendez-vous" className="inline-flex items-center justify-center gap-2 bg-white text-blue-700 px-8 py-4 rounded-xl text-base font-bold hover:bg-blue-50 shadow-xl shadow-black/10 transition-all hover:scale-105">
+                <Link to="/rendez-vous" className="inline-flex items-center justify-center gap-2 bg-red-600 text-white px-8 py-4 rounded-xl text-base font-bold hover:bg-red-700 shadow-xl shadow-black/10 transition-all hover:scale-105">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                   Prendre Rendez-vous
                 </Link>
@@ -135,7 +135,7 @@ export default function Accueil() {
                   </div>
                 ))}
               </div>
-              <Link to="/sante-travail" className="inline-flex items-center gap-2 bg-blue-500 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-blue-600 shadow-lg shadow-blue-500/30 transition-all">
+              <Link to="/sante-travail" className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-red-700 shadow-lg shadow-red-500/30 transition-all">
                 Demander une offre
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
               </Link>

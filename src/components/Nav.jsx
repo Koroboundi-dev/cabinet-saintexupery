@@ -70,7 +70,7 @@ export default function Nav() {
 
             {/* Actions desktop */}
             <div className="hidden lg:flex items-center shrink-0">
-              <Link to="/rendez-vous" className="inline-flex items-center gap-1.5 bg-blue-600 text-white px-3.5 xl:px-5 py-2.5 rounded-xl text-xs xl:text-sm font-bold hover:bg-blue-700 shadow-md shadow-blue-200 hover:shadow-blue-300 transition-all whitespace-nowrap">
+              <Link to="/rendez-vous" className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3.5 xl:px-5 py-2.5 rounded-xl text-xs xl:text-sm font-bold hover:bg-red-700 shadow-md shadow-red-200 hover:shadow-red-300 transition-all whitespace-nowrap">
                 <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 Prendre RDV
               </Link>
@@ -115,7 +115,7 @@ export default function Nav() {
                 </NavLink>
               ))}
               <div className="pt-3 border-t space-y-2">
-                <Link to="/rendez-vous" className="block w-full text-center bg-blue-600 text-white px-5 py-3.5 rounded-xl text-base font-bold hover:bg-blue-700 transition">Prendre Rendez-vous</Link>
+                <Link to="/rendez-vous" className="block w-full text-center bg-red-600 text-white px-5 py-3.5 rounded-xl text-base font-bold hover:bg-red-700 transition">Prendre Rendez-vous</Link>
                 {user && isAdmin() && (
                   <Link to="/admin" className="block w-full text-center bg-gray-800 text-white px-5 py-3.5 rounded-xl text-base font-bold hover:bg-gray-900 transition">Dashboard Admin</Link>
                 )}
