@@ -7,18 +7,28 @@ import { formatDateFr, limit, imageSrc } from '../utils/format.js'
 export default function Accueil() {
   const [data, setData] = useState(null)
   const { settings, ready } = useSettings()
+  const slides = ready ? [imageSrc(settings.hero_image) || '/images/medical100.png', '/images/img12.jpg', '/images/img4.png'] : []
+  const [slide, setSlide] = useState(0)
 
   useEffect(() => {
     document.title = 'Cabinet Médical Saint-Exupéry International | Médecine, Urgences, Prévention'
     api.get('/accueil').then(setData).catch(() => setData({ services: [], medecins: [], campagnes: [], actualites: [], formations: [] }))
   }, [])
 
-  const heroImage = ready ? imageSrc(settings.hero_image) || '/images/medical100.png' : null
+  useEffect(() => {
+    if (!slides.length) return undefined
+    const t = setInterval(() => setSlide((s) => (s + 1) % slides.length), 5000)
+    return () => clearInterval(t)
+  }, [slides.length])
 
   return (
     <>
       {/* HERO */}
-      <section className="hero-gradient relative overflow-hidden min-h-[90vh] flex items-center fade-in" style={heroImage ? { backgroundImage: `url('${heroImage}')` } : undefined}>
+      <section className="relative overflow-hidden min-h-[90vh] flex items-center fade-in bg-slate-900">
+        {slides.map((src, i) => (
+          <div key={src} aria-hidden={i !== slide} className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${i === slide ? 'opacity-100' : 'opacity-0'}`} style={{ backgroundImage: `url('${src}')` }} />
+        ))}
+        <div className="absolute inset-0 hero-gradient pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
           <div className="grid lg:grid-cols-1 gap-12 items-center">
             <div className="text-center max-w-3xl mx-auto">
