@@ -1,13 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api/client.js'
 import { useSettings } from '../context/SettingsContext.jsx'
 import { formatDateFr, limit, imageSrc } from '../utils/format.js'
 
+const SLIDES_DEFAUT = ['/images/medical100.png', '/images/img12.jpg', '/images/img4.png']
+
 export default function Accueil() {
   const [data, setData] = useState(null)
   const { settings, ready } = useSettings()
-  const slides = ready ? [imageSrc(settings.hero_image) || '/images/medical100.png', '/images/img12.jpg', '/images/img4.png'] : []
+  const heroParam = ready ? imageSrc(settings.hero_image) : null
+  const slides = useMemo(
+    () => (heroParam && !SLIDES_DEFAUT.includes(heroParam) ? [heroParam, ...SLIDES_DEFAUT] : SLIDES_DEFAUT),
+    [heroParam]
+  )
   const [slide, setSlide] = useState(0)
 
   useEffect(() => {
@@ -16,10 +22,15 @@ export default function Accueil() {
   }, [])
 
   useEffect(() => {
-    if (!slides.length) return undefined
-    const t = setInterval(() => setSlide((s) => (s + 1) % slides.length), 5000)
-    return () => clearInterval(t)
-  }, [slides.length])
+    slides.forEach((src) => { const img = new Image(); img.src = src })
+    let timer = null
+    const demarrer = () => { if (!timer && !document.hidden) timer = setInterval(() => setSlide((s) => (s + 1) % slides.length), 5000) }
+    const arreter = () => { if (timer) { clearInterval(timer); timer = null } }
+    const onVisibilite = () => (document.hidden ? arreter() : demarrer())
+    demarrer()
+    document.addEventListener('visibilitychange', onVisibilite)
+    return () => { arreter(); document.removeEventListener('visibilitychange', onVisibilite) }
+  }, [slides])
 
   return (
     <>
