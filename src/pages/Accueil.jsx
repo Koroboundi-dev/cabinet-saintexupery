@@ -4,7 +4,7 @@ import { api } from '../api/client.js'
 import { useSettings } from '../context/SettingsContext.jsx'
 import { formatDateFr, limit, imageSrc } from '../utils/format.js'
 
-const SLIDES_DEFAUT = ['/images/medical100.png', '/images/img12.jpg', '/images/img4.png']
+const SLIDES_DEFAUT = ['/images/medical100.png', '/images/img50.jpg.avif', '/images/img4.png']
 
 export default function Accueil() {
   const [data, setData] = useState(null)
